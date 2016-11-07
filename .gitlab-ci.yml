@@ -1,0 +1,43 @@
+image: ruby:2.3
+
+stages:
+    - prepare
+    - deploy
+    - test
+    - destroy
+
+prepare:
+    stage: prepare
+    script:
+        - echo -n "$kitchen_ci_key" | tr -d '\r' > ./id_rsa
+        - chmod 600 ./id_rsa
+        - "sed -i \"s/openstack_api_key.*/openstack_api_key: $kitchen_ci_pass/g\" .kitchen.yml"
+        - gem install test-kitchen
+        - gem install kitchen-puppet
+        - gem install kitchen-openstack
+        - gem install puppet
+        - gem install librarian-puppet
+        - librarian-puppet init
+        - librarian-puppet install
+        - kitchen create 
+
+deploy: 
+    stage: deploy
+    script:
+        - kitchen converge
+        - kitchen converge
+
+test1: 
+    stage: test
+    script:
+        - ls -la
+
+test2: 
+    stage: test
+    script:
+        - ls -la
+
+destory: 
+    stage: destroy
+    script:
+        - kitchen destroy

@@ -1,0 +1,5 @@
+*.swp
+.kitchen
+.librarian
+.tmp
+Puppetfile.lock

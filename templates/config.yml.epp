@@ -1,0 +1,14 @@
+servers:
+    thrift: <%= $cactos_monitoring_gui::server_thrift_host %>
+    thriftport: <%= $cactos_monitoring_gui::server_thrift_port %>
+
+worker:
+    sleeper: 10
+
+paths:
+    storagePath: data/storage/
+
+app:
+    host: <%= $cactos_monitoring_gui::app_host %>
+    port: <%= $cactos_monitoring_gui::app_port %>
+
